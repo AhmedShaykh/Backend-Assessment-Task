@@ -54,15 +54,9 @@ export class ProductService {
 
     };
 
-    async update(id: number, data: UpdateProductDTO, userId: number) {
+    async update(id: number, data: UpdateProductDTO) {
 
-        const product = await this.findOne(id);
-
-        if (product.userId !== userId) {
-
-            throw new ForbiddenException("You Can Only Update Your Own Products");
-
-        }
+        await this.findOne(id);
 
         return this.prisma.product.update({
             where: { id },
@@ -71,15 +65,9 @@ export class ProductService {
 
     };
 
-    async delete(id: number, userId: number) {
+    async delete(id: number) {
 
-        const product = await this.findOne(id);
-
-        if (product.userId !== userId) {
-
-            throw new ForbiddenException("You Can Only Delete Your Own Products");
-
-        }
+        await this.findOne(id);
 
         await this.prisma.product.delete({
             where: { id }

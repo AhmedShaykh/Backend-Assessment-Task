@@ -26,13 +26,13 @@ export class ProductController {
     };
 
     @Put(":id")
-    updateProduct(@Param("id") id: string, @Body() body: UpdateProductDTO, @GetUser() user: any) {
-        return this.productService.update(Number(id), body, user.id);
+    updateProduct(@Param("id") id: string, @Body() body: UpdateProductDTO) {
+        return this.productService.update(Number(id), body);
     };
 
     @Delete(":id")
-    deleteProduct(@Param("id") id: string, @GetUser() user: any) {
-        return this.productService.delete(Number(id), user.id);
+    deleteProduct(@Param("id") id: string) {
+        return this.productService.delete(Number(id));
     };
 
 };
